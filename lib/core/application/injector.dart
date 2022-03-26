@@ -7,6 +7,7 @@ GetIt locator = GetIt.instance;
 
 Future<void> setupLocator({bool testing = false}) async {
   if (testing) {
+    // Create Mock services to set up in testing enviroment locator
   } else {
     final sharedPreferences = await SharedPreferences.getInstance();
     locator.registerSingleton(sharedPreferences);
