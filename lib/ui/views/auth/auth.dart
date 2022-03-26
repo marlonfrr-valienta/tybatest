@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:tybatest/ui/views/auth/login.dart';
 import 'package:tybatest/ui/views/auth/signup.dart';
 
-class SignUpView extends StatefulWidget {
-  const SignUpView({Key? key}) : super(key: key);
+class AuthView extends StatefulWidget {
+  const AuthView({Key? key}) : super(key: key);
 
   @override
-  State<SignUpView> createState() => _SignUpViewState();
+  State<AuthView> createState() => _AuthViewState();
 }
 
-class _SignUpViewState extends State<SignUpView> {
+class _AuthViewState extends State<AuthView> {
   PageController _pageController = PageController();
 
   @override

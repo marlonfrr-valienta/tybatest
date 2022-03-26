@@ -38,6 +38,16 @@ class _LoginBodyState extends State<LoginBody> {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const SearchView()));
                   }
                 }),
+            const SizedBox(height: 20),
+            TextButton(
+                child: const Text('No tengo cuenta'),
+                onPressed: () {
+                  widget.pageAuthController.animateToPage(
+                    1,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.linear,
+                  );
+                }),
           ])),
     );
   }

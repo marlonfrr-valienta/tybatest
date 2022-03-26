@@ -2,7 +2,6 @@ import 'package:dio/dio.dart';
 import 'package:tybatest/constants/endpoints.dart';
 import 'package:tybatest/core/application/injector.dart';
 import 'package:tybatest/core/models/restaurant.dart';
-import 'package:tybatest/core/models/user.dart';
 
 abstract class IRestaurantsRepository {
   Future<List<Restaurant>?>? searchNearbyRestaurants(String location);

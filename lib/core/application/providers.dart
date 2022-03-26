@@ -13,5 +13,3 @@ final restaurantsRepositoryProvider = Provider<IRestaurantsRepository>((ref) => 
 final restaurantsProvider = StateNotifierProvider((ref) => RestaurantsNotifier(ref, ref.watch(restaurantsRepositoryProvider)));
 
 final restaurantSearchTermProvider = StateProvider<String>((ref) => "");
-
-// final recentSearchesProvider = StateNotifierProvider((ref) => RecentSearchesNotifier());

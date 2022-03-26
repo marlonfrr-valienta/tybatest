@@ -10,7 +10,6 @@ class CustomTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return TextField(
-      // key: Key('search-bar-field'),
       controller: controller,
       onChanged: (String value) => onChangeCallback(value),
       style: const TextStyle(fontSize: 14),

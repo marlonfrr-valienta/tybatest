@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tybatest/core/application/injector.dart';
 import 'package:tybatest/core/application/providers.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:tybatest/ui/common/debouncer.dart';
 import 'package:tybatest/ui/common/custom_text_field.dart';
+import 'package:tybatest/ui/views/auth/auth.dart';
 import 'package:tybatest/ui/views/recent/recent_searches.dart';
+import 'package:tybatest/ui/views/search/search_results_list.dart';
 
 class SearchView extends StatefulWidget {
   const SearchView({Key? key}) : super(key: key);
@@ -31,6 +34,11 @@ class _SearchViewState extends State<SearchView> {
     }, 500);
   }
 
+  void logout() {
+    locator<SharedPreferences>().clear();
+    Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (builder) => const AuthView()));
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,43 +51,13 @@ class _SearchViewState extends State<SearchView> {
               controller: _searchTextController,
               onChangeCallback: textChanged,
             ),
-            ElevatedButton(
+            TextButton(
                 child: const Text('Búsquedas recientes'),
                 onPressed: () {
                   Navigator.of(context).push(MaterialPageRoute(builder: (context) => const RecentSearchesView()));
                 }),
-            Consumer(
-              builder: (context, watch, child) {
-                final restaurantsState = watch(restaurantsProvider.state);
-                return restaurantsState.when(data: (restaurants) {
-                  return restaurants.isEmpty
-                      ? const Text('Introduce una ciudad para buscar')
-                      : Expanded(
-                          child: ListView.builder(
-                              itemCount: restaurants.length,
-                              shrinkWrap: true,
-                              itemBuilder: (context, index) {
-                                return Container(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-                                  decoration: BoxDecoration(
-                                    color: Colors.grey.shade100,
-                                    borderRadius: BorderRadius.circular(16),
-                                  ),
-                                  child: Text(restaurants[index].name!),
-                                );
-                              }),
-                        );
-                }, loading: () {
-                  return const CircularProgressIndicator();
-                }, error: (err, st) {
-                  return Container(
-                    height: 40,
-                    width: 40,
-                    color: Colors.red,
-                  );
-                });
-              },
-            )
+            TextButton(child: const Text('Cerrar sesión'), onPressed: logout),
+            const SearchResultsList()
           ],
         ),
       ),

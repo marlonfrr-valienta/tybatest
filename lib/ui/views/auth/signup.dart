@@ -38,6 +38,16 @@ class _SignUpBodyState extends State<SignUpBody> {
                     Navigator.of(context).pushReplacement(MaterialPageRoute(builder: (context) => const SearchView()));
                   }
                 }),
+            const SizedBox(height: 20),
+            TextButton(
+                child: const Text('Ya tengo cuenta'),
+                onPressed: () {
+                  widget.pageAuthController.animateToPage(
+                    0,
+                    duration: const Duration(milliseconds: 300),
+                    curve: Curves.linear,
+                  );
+                }),
           ])),
     );
   }
